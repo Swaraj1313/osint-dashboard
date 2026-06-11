@@ -1,6 +1,8 @@
 # OSINT Intelligence Platform
 
-A multilingual real-time intelligence and monitoring platform for open-source data collection, AI-powered analysis and humanitarian situational awareness. Built for research and policy contexts including transnational organised crime, disaster response and public health surveillance.
+A multilingual real-time intelligence and monitoring platform for open-source data collectionm geo-locating events & AI-powered analysis. Built for research and policy contexts including transnational organised crime, disaster response and public health surveillance.
+
+This tool collects and analyses open-source intelligence from public Telegram channels and news sources in real time. It monitors content across multiple languages including Burmese, Thai, Chinese, French and English, translates it automatically and uses AI to flag suspicious activity, classify each message into an intelligence category and score how credible the information is. The platform currently tracks organised crime networks in Southeast Asia including scam compounds, arms dealing and sanctions evasion, alongside active crises such as the Philippines earthquake and the DRC Ebola outbreak. Analysts can explore findings through four views - a live intelligence feed showing flagged messages with AI-generated notes, an interactive network graph mapping relationships between people, organisations and locations extracted from the data, a geographic map plotting incidents by location.
 
 **Live app:** [osint-dashboard-kxhsy4gvspevhvzvo36ah9.streamlit.app](https://osint-dashboard-kxhsy4gvspevhvzvo36ah9.streamlit.app)
 
@@ -8,7 +10,7 @@ A multilingual real-time intelligence and monitoring platform for open-source da
 
 ## What it does
 
-The platform ingests content from public Telegram channels and news sources, translates non-English content natively using AI, classifies each message against a 16-category intelligence typology, scores credibility on four dimensions and surfaces actionable analyst findings through a live dashboard.
+The platform ingests content from social media; public Telegram channels and news sources, translates non-English content natively using AI, classifies each message against a 16-category intelligence typology, scores credibility on four dimensions and surfaces actionable analyst findings through a live dashboard.
 
 **Currently monitoring:**
 - Organised crime and sanctions evasion networks in Southeast Asia (Myanmar, Thailand, Singapore)
@@ -194,16 +196,5 @@ Messages are classified into one of 16 categories:
 
 ---
 
-## Deployment
 
-The dashboard reads all data from S3. No local database required on the server.
 
-AWS credentials are stored as Streamlit Cloud secrets. For local development configure via `aws configure`.
-
-To add new monitoring channels update the `PROFILES` dictionary in Module 1 Cell 3. To add new known locations for map plotting add coordinates to the `COORDS` dictionary in `app.py`.
-
----
-
-## Related tools
-
-This dashboard is part of a broader analytics portfolio. Other tools in the collection cover trade in services data visualisation (OECD BaTIS), satellite-derived economic activity monitoring (Ethiopia nightlights), mangrove ecosystem change detection and macroeconomic indicator dashboards.
