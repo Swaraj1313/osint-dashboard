@@ -1,5 +1,4 @@
-import os
-os.environ["AWS_DEFAULT_REGION"] = "us-east-1"
+
 import streamlit as st
 import pandas as pd
 import json, boto3, io
@@ -551,7 +550,17 @@ Write the briefing with these exact sections:
 
 Write in clear professional analytical prose. Be specific with names, places, and amounts where available."""
 
-            client = boto3.client("bedrock-runtime", region_name="us-east-1")
+            try:
+                creds = st.secrets["aws"]
+                client = boto3.client(
+                    "bedrock-runtime",
+                    region_name=creds["AWS_DEFAULT_REGION"],
+                    aws_access_key_id=creds["AWS_ACCESS_KEY_ID"],
+                    aws_secret_access_key=creds["AWS_SECRET_ACCESS_KEY"]
+                )
+            except Exception:
+                client = boto3.client("bedrock-runtime", region_name="us-east-1")
+
             body   = json.dumps({
                 "messages": [{"role":"user","content":[{"text":prompt}]}],
                 "inferenceConfig": {"maxTokens": 1500}
@@ -559,7 +568,6 @@ Write in clear professional analytical prose. Be specific with names, places, an
             resp  = client.invoke_model(modelId="amazon.nova-lite-v1:0", body=body,
                                         contentType="application/json", accept="application/json")
             brief = json.loads(resp["body"].read())["output"]["message"]["content"][0]["text"]
-
         st.markdown("---")
         st.markdown("### Generated Intelligence Brief")
         st.markdown(
